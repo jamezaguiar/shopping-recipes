@@ -133,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "ng-complete-guide-update"
+  "defaultProject": "ng-complete-guide-update",
+  "cli": {
+    "analytics": "1b3b1516-a7d4-49f9-a6ca-74e8d08d5bfd"
+  }
 }
