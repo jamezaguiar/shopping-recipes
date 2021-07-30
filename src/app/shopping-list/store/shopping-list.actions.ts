@@ -7,6 +7,8 @@ export enum ShoppingListTypes {
   ADD_INGREDIENTS = 'ADD_INGREDIENTS',
   UPDATE_INGREDIENT = 'UPDATE_INGREDIENT',
   DELETE_INGREDIENT = 'DELETE_INGREDIENT',
+  START_EDIT = 'START_EDIT',
+  STOP_EDIT = 'STOP_EDIT',
 }
 
 export class AddIngredient implements Action {
@@ -33,8 +35,20 @@ export class DeleteIngredient implements Action {
   constructor(public payload: { index: number }) {}
 }
 
+export class StartEdit implements Action {
+  readonly type = ShoppingListTypes.START_EDIT;
+
+  constructor(public payload: { index: number }) {}
+}
+
+export class StopEdit implements Action {
+  readonly type = ShoppingListTypes.STOP_EDIT;
+}
+
 export type ShoppingListActions =
   | AddIngredient
   | AddIngredients
   | UpdateIngredient
-  | DeleteIngredient;
+  | DeleteIngredient
+  | StartEdit
+  | StopEdit;
