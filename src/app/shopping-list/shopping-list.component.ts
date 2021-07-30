@@ -5,9 +5,10 @@ import { Store } from '@ngrx/store';
 import { ShoppingListService } from './shopping-list.service';
 import { LoggingService } from '../logging.service';
 
-import { Ingredient } from '../shared/ingredient.model';
-
-import { ShoppingListState } from './store/shopping-list.reducer';
+import {
+  ShoppingListState,
+  ShoppingListAppState,
+} from './store/shopping-list.reducer';
 
 @Component({
   selector: 'app-shopping-list',
@@ -20,7 +21,7 @@ export class ShoppingListComponent implements OnInit {
   constructor(
     private slService: ShoppingListService,
     private loggingService: LoggingService,
-    private store: Store<{ shoppingList: ShoppingListState }>
+    private store: Store<ShoppingListAppState>
   ) {}
 
   ngOnInit() {
