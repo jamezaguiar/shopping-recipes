@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 
 export enum AuthTypes {
-  LOGIN = 'LOGIN',
-  LOGOUT = 'LOGOUT',
+  LOGIN = '[Auth] Login',
+  LOGOUT = '[Auth] Logout',
 }
 
 export class Login implements Action {
