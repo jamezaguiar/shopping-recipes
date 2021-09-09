@@ -1,6 +1,6 @@
 import {
-  ShoppingListTypes,
   ShoppingListActions,
+  ShoppingListActionsUnion,
 } from './shopping-list.actions';
 
 import { Ingredient } from '@shared/ingredient.model';
@@ -19,20 +19,20 @@ const initialState: ShoppingListState = {
 
 export function shoppingListReducer(
   state: ShoppingListState = initialState,
-  action: ShoppingListActions
+  action: ShoppingListActionsUnion
 ): ShoppingListState {
   switch (action.type) {
-    case ShoppingListTypes.ADD_INGREDIENT:
+    case ShoppingListActions.ADD_INGREDIENT:
       return {
         ...state,
         ingredients: [...state.ingredients, action.payload],
       };
-    case ShoppingListTypes.ADD_INGREDIENTS:
+    case ShoppingListActions.ADD_INGREDIENTS:
       return {
         ...state,
         ingredients: [...state.ingredients, ...action.payload],
       };
-    case ShoppingListTypes.UPDATE_INGREDIENT:
+    case ShoppingListActions.UPDATE_INGREDIENT:
       const oldIngredient = state.ingredients[state.editedIngredientIndex];
       const updatedIngredient = {
         ...oldIngredient,
@@ -47,7 +47,7 @@ export function shoppingListReducer(
         editedIngredient: null,
         editedIngredientIndex: -1,
       };
-    case ShoppingListTypes.DELETE_INGREDIENT:
+    case ShoppingListActions.DELETE_INGREDIENT:
       return {
         ...state,
         ingredients: state.ingredients.filter(
@@ -57,13 +57,13 @@ export function shoppingListReducer(
         editedIngredient: null,
         editedIngredientIndex: -1,
       };
-    case ShoppingListTypes.START_EDIT:
+    case ShoppingListActions.START_EDIT:
       return {
         ...state,
         editedIngredient: { ...state.ingredients[action.payload.index] },
         editedIngredientIndex: action.payload.index,
       };
-    case ShoppingListTypes.STOP_EDIT:
+    case ShoppingListActions.STOP_EDIT:
       return {
         ...state,
         editedIngredient: null,

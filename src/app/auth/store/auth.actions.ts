@@ -1,12 +1,13 @@
 import { Action } from '@ngrx/store';
 
-export enum AuthTypes {
+export enum AuthActions {
+  LOGIN_START = '[Auth] Login Start',
   LOGIN = '[Auth] Login',
   LOGOUT = '[Auth] Logout',
 }
 
 export class Login implements Action {
-  readonly type = AuthTypes.LOGIN;
+  readonly type = AuthActions.LOGIN;
 
   constructor(
     public payload: {
@@ -19,7 +20,7 @@ export class Login implements Action {
 }
 
 export class Logout implements Action {
-  readonly type = AuthTypes.LOGOUT;
+  readonly type = AuthActions.LOGOUT;
 }
 
-export type AuthActions = Login | Logout;
+export type AuthActionsUnion = Login | Logout;

@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { Ingredient } from '@shared/ingredient.model';
 
-export enum ShoppingListTypes {
+export enum ShoppingListActions {
   ADD_INGREDIENT = '[Shopping List] Add Ingredient',
   ADD_INGREDIENTS = '[Shopping List] Add Ingredients',
   UPDATE_INGREDIENT = '[Shopping List] Update Ingredient',
@@ -12,38 +12,38 @@ export enum ShoppingListTypes {
 }
 
 export class AddIngredient implements Action {
-  readonly type = ShoppingListTypes.ADD_INGREDIENT;
+  readonly type = ShoppingListActions.ADD_INGREDIENT;
 
   constructor(public payload: Ingredient) {}
 }
 
 export class AddIngredients implements Action {
-  readonly type = ShoppingListTypes.ADD_INGREDIENTS;
+  readonly type = ShoppingListActions.ADD_INGREDIENTS;
 
   constructor(public payload: Ingredient[]) {}
 }
 
 export class UpdateIngredient implements Action {
-  readonly type = ShoppingListTypes.UPDATE_INGREDIENT;
+  readonly type = ShoppingListActions.UPDATE_INGREDIENT;
 
   constructor(public payload: Ingredient) {}
 }
 
 export class DeleteIngredient implements Action {
-  readonly type = ShoppingListTypes.DELETE_INGREDIENT;
+  readonly type = ShoppingListActions.DELETE_INGREDIENT;
 }
 
 export class StartEdit implements Action {
-  readonly type = ShoppingListTypes.START_EDIT;
+  readonly type = ShoppingListActions.START_EDIT;
 
   constructor(public payload: { index: number }) {}
 }
 
 export class StopEdit implements Action {
-  readonly type = ShoppingListTypes.STOP_EDIT;
+  readonly type = ShoppingListActions.STOP_EDIT;
 }
 
-export type ShoppingListActions =
+export type ShoppingListActionsUnion =
   | AddIngredient
   | AddIngredients
   | UpdateIngredient

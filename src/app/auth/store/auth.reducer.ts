@@ -1,5 +1,5 @@
 import { User } from '../user.model';
-import { AuthActions, AuthTypes } from './auth.actions';
+import { AuthActionsUnion, AuthActions } from './auth.actions';
 
 export type AuthState = {
   user: User;
@@ -9,9 +9,9 @@ const initialState: AuthState = {
   user: null,
 };
 
-export function authReducer(state = initialState, action: AuthActions) {
+export function authReducer(state = initialState, action: AuthActionsUnion) {
   switch (action.type) {
-    case AuthTypes.LOGIN:
+    case AuthActions.LOGIN:
       const { email, userId, token, tokenExpirationDate } = action.payload;
 
       const user = new User(email, userId, token, tokenExpirationDate);
@@ -20,7 +20,7 @@ export function authReducer(state = initialState, action: AuthActions) {
         ...state,
         user,
       };
-    case AuthTypes.LOGOUT:
+    case AuthActions.LOGOUT:
       return {
         ...state,
         user: null,
