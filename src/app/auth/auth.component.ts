@@ -3,18 +3,23 @@ import {
   ComponentFactoryResolver,
   ViewChild,
   OnDestroy,
-} from "@angular/core";
-import { NgForm } from "@angular/forms";
-import { Router } from "@angular/router";
-import { Observable, Subscription } from "rxjs";
+} from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
 
-import { AuthService, AuthResponseData } from "./auth.service";
-import { AlertComponent } from "../shared/alert/alert.component";
-import { PlaceholderDirective } from "../shared/placeholder/placeholder.directive";
+import { AppState } from '../store/app.reducer';
+
+import { LoginStart } from './store/auth.actions';
+
+import { AuthService, AuthResponseData } from './auth.service';
+import { AlertComponent } from '../shared/alert/alert.component';
+import { PlaceholderDirective } from '../shared/placeholder/placeholder.directive';
 
 @Component({
-  selector: "app-auth",
-  templateUrl: "./auth.component.html",
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
 })
 export class AuthComponent implements OnDestroy {
   isLoginMode = true;
@@ -28,7 +33,8 @@ export class AuthComponent implements OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private store: Store<AppState>
   ) {}
 
   onSwitchMode() {
@@ -47,7 +53,8 @@ export class AuthComponent implements OnDestroy {
     this.isLoading = true;
 
     if (this.isLoginMode) {
-      authObs = this.authService.login(email, password);
+      // authObs = this.authService.login(email, password);
+      this.store.dispatch(new LoginStart({ email, password }));
     } else {
       authObs = this.authService.signup(email, password);
     }
@@ -56,7 +63,7 @@ export class AuthComponent implements OnDestroy {
       (resData) => {
         console.log(resData);
         this.isLoading = false;
-        this.router.navigate(["/recipes"]);
+        this.router.navigate(['/recipes']);
       },
       (errorMessage) => {
         console.log(errorMessage);

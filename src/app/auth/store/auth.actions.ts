@@ -6,6 +6,12 @@ export enum AuthActions {
   LOGOUT = '[Auth] Logout',
 }
 
+export class LoginStart implements Action {
+  readonly type = AuthActions.LOGIN_START;
+
+  constructor(public payload: { email: string; password: string }) {}
+}
+
 export class Login implements Action {
   readonly type = AuthActions.LOGIN;
 
